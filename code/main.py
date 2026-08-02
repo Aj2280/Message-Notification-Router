@@ -3,9 +3,10 @@ import sys
 import os
 
 sys.path.insert(0, os.path.abspath("code"))
+sys.path.insert(0, "/Users/abhi/Library/Python/3.9/lib/python/site-packages")
 from src.context_builder import ContextBuilder
 from src.decision_logic import DecisionRouter
-from src.llm_router import LLMRouter
+from src.trained_router import TrainedRouter
 from src.evidence_selector import EvidenceSelector
 
 def main():
@@ -19,8 +20,11 @@ def main():
 
     print("Initializing Message Notification Router pipeline...")
     cb = ContextBuilder(dataset_dir)
-    local_router = DecisionRouter()
-    router = LLMRouter(fallback_router=local_router)  # Uses Gemini API if GEMINI_API_KEY is set, else local engine
+    # Use locally-trained ML model if models are available, else fall back to rule-based engine
+    router = TrainedRouter()
+    if not router._ready:
+        print("⚠️  Falling back to deterministic rule-based router.")
+        router = DecisionRouter()
     evidence_selector = EvidenceSelector()
 
     print(f"Reading incoming messages from {messages_path}...")

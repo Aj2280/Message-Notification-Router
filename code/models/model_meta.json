@@ -1,0 +1,25 @@
+{
+  "train_samples": 822,
+  "gold_samples": 30,
+  "action_classes": [
+    "digest",
+    "mute",
+    "notify"
+  ],
+  "mtype_classes": [
+    "business_update",
+    "event",
+    "forward",
+    "greeting",
+    "personal",
+    "promotion",
+    "scam",
+    "spam",
+    "unknown",
+    "urgent"
+  ],
+  "gold_action_acc": 0.9667,
+  "gold_mtype_acc": 1.0,
+  "tfidf_features": 3000,
+  "numeric_features": 22
+}
