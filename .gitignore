@@ -1,0 +1,16 @@
+# Environment & Dependencies
+.venv/
+venv/
+env/
+node_modules/
+package-lock.json
+
+# Scratch & Temporary Auth Session Files
+scratch/
+.swift-cache/
+*.log
+log.txt
+
+# OS Files
+.DS_Store
+Thumbs.db
