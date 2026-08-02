@@ -1,0 +1,111 @@
+message_id,action,message_type,reason,confidence,evidence_message_ids
+msg_023,digest,business_update,ML model classified this as informational content suitable for batching.,0.867,message_0102;message_0243
+msg_091,mute,scam,ML model detected scam/phishing indicators in message content.,0.997,message_0238;message_0381
+msg_090,digest,personal,ML model classified this as informational content suitable for batching.,0.841,none
+msg_048,mute,forward,ML model routing decision based on learned dataset patterns.,0.554,message_0237;message_0099
+msg_040,notify,urgent,ML model identified urgent time-sensitive content requiring immediate attention.,0.539,message_0136;message_0135
+msg_075,digest,business_update,ML model classified this as informational content suitable for batching.,0.785,message_0206;message_0205
+msg_005,digest,event,ML model classified this as informational content suitable for batching.,0.851,message_0231;message_0049
+msg_104,digest,personal,ML model classified this as informational content suitable for batching.,0.839,message_0232;message_0050
+msg_069,mute,greeting,ML model routing decision based on learned dataset patterns.,0.71,message_0080;message_0177
+msg_107,mute,scam,ML model detected scam/phishing indicators in message content.,0.653,message_0213;message_0196
+msg_070,digest,event,ML model classified this as informational content suitable for batching.,0.782,message_0213;message_0196
+msg_003,notify,business_update,ML model determined this message requires prompt user attention.,0.997,message_0400;message_0031
+msg_099,digest,personal,ML model classified this as informational content suitable for batching.,0.853,message_0118;message_0055
+msg_008,digest,business_update,ML model classified this as informational content suitable for batching.,0.778,message_0296;message_0071
+msg_092,digest,business_update,ML model classified this as informational content suitable for batching.,0.825,none
+msg_060,digest,event,ML model classified this as informational content suitable for batching.,0.821,message_0175;message_0404
+msg_004,notify,event,ML model determined this message requires prompt user attention.,1.0,message_0064;message_0245
+msg_030,digest,promotion,ML model classified this as informational content suitable for batching.,0.793,message_0232;message_0025
+msg_045,digest,event,ML model classified this as informational content suitable for batching.,0.721,message_0146;message_0145
+msg_052,mute,scam,ML model detected scam/phishing indicators in message content.,0.913,message_0159;message_0207
+msg_009,digest,event,ML model classified this as informational content suitable for batching.,0.807,message_0073;message_0074
+msg_071,digest,event,ML model classified this as informational content suitable for batching.,0.798,message_0197;message_0198
+msg_016,mute,scam,ML model detected scam/phishing indicators in message content.,0.706,message_0202;message_0184
+msg_065,mute,spam,ML model classified this as unwanted promotional or repetitive content.,0.763,message_0185;message_0186
+msg_038,mute,forward,ML model routing decision based on learned dataset patterns.,0.69,message_0131;message_0132
+msg_086,digest,personal,ML model classified this as informational content suitable for batching.,0.775,message_0222
+msg_014,mute,promotion,ML model classified this as unwanted promotional or repetitive content.,1.0,message_0258;message_0083
+msg_094,mute,promotion,ML model classified this as unwanted promotional or repetitive content.,0.511,none
+msg_029,digest,promotion,ML model classified this as informational content suitable for batching.,0.833,message_0231;message_0049
+msg_105,digest,personal,ML model classified this as informational content suitable for batching.,0.765,message_0373;message_0233
+msg_002,notify,urgent,ML model identified urgent time-sensitive content requiring immediate attention.,0.76,message_0003;message_0060
+msg_010,digest,business_update,ML model classified this as informational content suitable for batching.,0.889,message_0011;message_0076
+msg_078,mute,forward,ML model routing decision based on learned dataset patterns.,0.659,message_0211;message_0212
+msg_013,digest,event,ML model classified this as informational content suitable for batching.,0.851,message_0081;message_0082
+msg_018,mute,forward,ML model routing decision based on learned dataset patterns.,0.479,message_0092;message_0091
+msg_044,mute,forward,ML model routing decision based on learned dataset patterns.,0.679,message_0144;message_0036
+msg_032,digest,event,ML model classified this as informational content suitable for batching.,0.814,message_0120;message_0374
+msg_106,digest,personal,ML model classified this as informational content suitable for batching.,0.812,message_0377;message_0376
+msg_006,digest,event,ML model classified this as informational content suitable for batching.,0.817,message_0029;message_0129
+msg_109,digest,event,ML model classified this as informational content suitable for batching.,0.777,message_0237;message_0099
+msg_108,mute,scam,ML model detected scam/phishing indicators in message content.,0.684,message_0094;message_0236
+msg_019,mute,scam,ML model detected scam/phishing indicators in message content.,0.893,message_0094;message_0236
+msg_088,digest,personal,ML model classified this as informational content suitable for batching.,0.652,message_0232;message_0025
+msg_056,notify,urgent,ML model identified urgent time-sensitive content requiring immediate attention.,0.554,message_0359;message_0123
+msg_027,digest,promotion,ML model classified this as informational content suitable for batching.,0.875,message_0272;message_0033
+msg_050,notify,event,ML model determined this message requires prompt user attention.,0.997,message_0155;message_0279
+msg_083,digest,event,ML model classified this as informational content suitable for batching.,0.71,message_0219
+msg_063,digest,event,ML model classified this as informational content suitable for batching.,0.76,message_0181;message_0182
+msg_033,digest,greeting,ML model classified this as informational content suitable for batching.,0.802,message_0393;message_0372
+msg_061,mute,greeting,ML model routing decision based on learned dataset patterns.,0.776,message_0080;message_0177
+msg_020,mute,forward,ML model routing decision based on learned dataset patterns.,0.523,message_0095;message_0390
+msg_017,digest,event,ML model classified this as informational content suitable for batching.,0.722,message_0090;message_0089
+msg_058,mute,forward,ML model routing decision based on learned dataset patterns.,0.711,message_0123;message_0168
+msg_026,mute,scam,ML model detected scam/phishing indicators in message content.,0.907,message_0107;message_0108
+msg_047,digest,event,ML model classified this as informational content suitable for batching.,0.763,message_0029;message_0129
+msg_046,digest,event,ML model classified this as informational content suitable for batching.,0.792,message_0148;message_0147
+msg_042,digest,event,ML model classified this as informational content suitable for batching.,0.797,message_0057;message_0058
+msg_079,digest,event,ML model classified this as informational content suitable for batching.,0.743,message_0213;message_0196
+msg_098,digest,personal,ML model classified this as informational content suitable for batching.,0.851,message_0359;message_0168
+msg_037,digest,event,ML model classified this as informational content suitable for batching.,0.779,message_0029;message_0129
+msg_007,digest,event,ML model classified this as informational content suitable for batching.,0.825,message_0070;message_0069
+msg_085,mute,scam,ML model detected scam/phishing indicators in message content.,0.498,message_0221
+msg_001,notify,urgent,ML model identified urgent time-sensitive content requiring immediate attention.,0.726,message_0057;message_0058
+msg_021,digest,event,ML model classified this as informational content suitable for batching.,0.819,message_0029;message_0129
+msg_028,mute,promotion,ML model classified this as unwanted promotional or repetitive content.,0.803,message_0034;message_0111
+msg_012,mute,forward,ML model routing decision based on learned dataset patterns.,0.697,message_0080;message_0177
+msg_064,mute,forward,ML model routing decision based on learned dataset patterns.,0.529,message_0202;message_0184
+msg_103,digest,personal,ML model classified this as informational content suitable for batching.,0.889,message_0231;message_0049
+msg_031,digest,event,ML model classified this as informational content suitable for batching.,0.83,message_0118;message_0055
+msg_057,notify,urgent,ML model identified urgent time-sensitive content requiring immediate attention.,0.75,message_0003;message_0060
+msg_087,digest,personal,ML model classified this as informational content suitable for batching.,0.656,message_0223;message_0164
+msg_067,digest,event,ML model classified this as informational content suitable for batching.,0.777,message_0029;message_0129
+msg_039,notify,event,ML model determined this message requires prompt user attention.,0.51,message_0209;message_0133
+msg_082,digest,urgent,ML model classified this as informational content suitable for batching.,0.487,message_0218;message_0380
+msg_066,mute,promotion,ML model classified this as unwanted promotional or repetitive content.,0.999,message_0187;message_0188
+msg_049,notify,business_update,ML model determined this message requires prompt user attention.,0.555,message_0153;message_0291
+msg_015,mute,scam,ML model detected scam/phishing indicators in message content.,0.644,message_0199;message_0174
+msg_051,mute,promotion,ML model classified this as unwanted promotional or repetitive content.,0.997,message_0157;message_0257
+msg_097,digest,personal,ML model classified this as informational content suitable for batching.,0.867,message_0359;message_0168
+msg_089,digest,personal,ML model classified this as informational content suitable for batching.,0.844,none
+msg_053,digest,forward,ML model classified this as informational content suitable for batching.,0.789,message_0253;message_0161
+msg_059,digest,event,ML model classified this as informational content suitable for batching.,0.8,message_0213;message_0196
+msg_024,mute,promotion,ML model classified this as unwanted promotional or repetitive content.,0.997,message_0157;message_0257
+msg_072,mute,forward,ML model routing decision based on learned dataset patterns.,0.533,message_0199;message_0174
+msg_036,mute,scam,ML model detected scam/phishing indicators in message content.,0.794,message_0127;message_0128
+msg_076,mute,scam,ML model detected scam/phishing indicators in message content.,0.913,message_0159;message_0207
+msg_055,digest,event,ML model classified this as informational content suitable for batching.,0.837,message_0166;message_0387
+msg_102,digest,personal,ML model classified this as informational content suitable for batching.,0.82,message_0003;message_0060
+msg_080,digest,event,ML model classified this as informational content suitable for batching.,0.78,message_0029;message_0129
+msg_093,digest,business_update,ML model classified this as informational content suitable for batching.,0.792,none
+msg_034,mute,greeting,ML model routing decision based on learned dataset patterns.,0.73,message_0123;message_0168
+msg_035,digest,business_update,ML model classified this as informational content suitable for batching.,0.831,message_0125;message_0126
+msg_101,digest,personal,ML model classified this as informational content suitable for batching.,0.857,message_0268;message_0370
+msg_041,digest,business_update,ML model classified this as informational content suitable for batching.,0.861,message_0138;message_0137
+msg_011,mute,greeting,ML model routing decision based on learned dataset patterns.,0.874,message_0123;message_0168
+msg_110,mute,scam,ML model detected scam/phishing indicators in message content.,0.731,message_0238;message_0381
+msg_095,digest,personal,ML model classified this as informational content suitable for batching.,0.768,message_0202;message_0184
+msg_074,mute,forward,ML model routing decision based on learned dataset patterns.,0.634,message_0223;message_0164
+msg_073,mute,forward,ML model routing decision based on learned dataset patterns.,0.646,message_0202;message_0184
+msg_054,digest,event,ML model classified this as informational content suitable for batching.,0.705,message_0223;message_0164
+msg_068,digest,event,ML model classified this as informational content suitable for batching.,0.766,message_0191;message_0192
+msg_100,notify,urgent,ML model identified urgent time-sensitive content requiring immediate attention.,0.778,message_0118;message_0055
+msg_062,notify,event,ML model determined this message requires prompt user attention.,0.532,message_0029;message_0129
+msg_096,digest,personal,ML model classified this as informational content suitable for batching.,0.772,none
+msg_043,notify,urgent,ML model identified urgent time-sensitive content requiring immediate attention.,0.648,message_0029;message_0129
+msg_077,notify,event,ML model determined this message requires prompt user attention.,0.898,message_0209;message_0133
+msg_081,digest,personal,ML model classified this as informational content suitable for batching.,0.721,message_0217
+msg_025,notify,business_update,ML model determined this message requires prompt user attention.,1.0,message_0105;message_0106
+msg_084,digest,personal,ML model classified this as informational content suitable for batching.,0.534,message_0220
+msg_022,digest,event,ML model classified this as informational content suitable for batching.,0.828,message_0237;message_0099
