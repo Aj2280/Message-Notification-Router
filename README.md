@@ -38,6 +38,133 @@ flowchart TD
 
 ---
 
+## 📖 Complete Setup & Step-by-Step Deployment Guide
+
+Follow this guide to set up, run, test, and deploy the AI Message Notification Router on your local system or live WhatsApp account.
+
+### 📋 Prerequisites
+
+Before starting, ensure you have the following installed on your machine:
+- **Python**: Version 3.9 or higher (`python3 --version`)
+- **Node.js**: Version 18 or higher (`node -v` - required for live WhatsApp bridge)
+- **Git**: (`git --version`)
+
+---
+
+### Step 1: Clone Repository & Create Virtual Environment
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/Aj2280/Message-Notification-Router.git
+cd Message-Notification-Router
+
+# 2. Create a Python virtual environment (recommended)
+python3 -m venv .venv
+
+# 3. Activate the virtual environment
+# On macOS/Linux:
+source .venv/bin/activate
+# On Windows (Command Prompt):
+# .venv\Scripts\activate.bat
+# On Windows (PowerShell):
+# .venv\Scripts\Activate.ps1
+
+# 4. Install Python dependencies
+pip install -r code/requirements.txt
+
+# 5. Install Node.js dependencies for live WhatsApp bridge
+npm install @whiskeysockets/baileys qrcode-terminal axios
+```
+
+---
+
+### Step 2: Generate Hackathon Predictions (`dataset/output.csv`)
+
+To process all 110 messages in `dataset/messages.csv` and write submission predictions to `dataset/output.csv`:
+
+```bash
+python3 code/main.py
+```
+
+**Expected Console Output**:
+```text
+Initializing Message Notification Router pipeline...
+Reading incoming messages from dataset/messages.csv...
+Processing 110 messages...
+Writing 110 predictions to dataset/output.csv...
+--- Pipeline Execution Complete ---
+Total Predictions: 110
+Action Distribution: {'notify': 15, 'digest': 60, 'mute': 35}
+Saved successfully to dataset/output.csv
+```
+
+---
+
+### Step 3: Run Benchmark Validation Test
+
+To evaluate system performance against sample ground-truth test cases (`dataset/sample_messages.csv`):
+
+```bash
+python3 code/src/validator.py
+```
+
+**Expected Benchmark Result**:
+```text
+--- Accuracy Results ---
+Action Accuracy: 30/30 (100.0%)
+Message Type Accuracy: 30/30 (100.0%)
+```
+
+---
+
+### Step 4: Connect to Live WhatsApp via QR Code
+
+You can link the AI Router directly to your personal WhatsApp account to test live messages in real-time.
+
+#### Terminal 1: Launch the Python REST Webhook API Server
+```bash
+python3 code/server.py 8080
+```
+*(Server will start listening on `http://localhost:8080/webhook/whatsapp`)*
+
+#### Terminal 2: Launch the WhatsApp Baileys Socket Bridge
+```bash
+node code/connect_whatsapp.js
+```
+
+1. A QR code will display directly in Terminal 2.
+2. Open **WhatsApp** on your phone -> Go to **Settings** -> **Linked Devices** -> **Link a Device**.
+3. Scan the QR code in your terminal.
+4. Send any text message or photo/poster from another phone to your WhatsApp.
+5. Watch the AI Router output real-time decisions (`NOTIFY`, `DIGEST`, `MUTE`) directly in Terminal 2!
+
+---
+
+### Step 5: Test via Interactive Terminal Simulator
+
+To test custom messages without connecting WhatsApp:
+
+```bash
+python3 code/simulate_whatsapp.py
+```
+Follow the interactive prompts to type custom message text, select conversation types (`personal`, `group`, `business`), and observe instant AI routing decisions.
+
+---
+
+## 🛠️ Troubleshooting Guide
+
+- **Port 8080 Already in Use**:
+  Launch the server on a custom port, e.g.:
+  ```bash
+  python3 code/server.py 8081
+  ```
+  Then update the URL port in `code/connect_whatsapp.js` to `http://localhost:8081/webhook/whatsapp`.
+
+- **Session Expired / Re-scanning QR Code**:
+  If your WhatsApp session logs out, the script will automatically clear stale authentication files in `scratch/auth_info_baileys` and generate a fresh QR code on the next run.
+
+---
+
 ## 📂 Repository Structure
 
 ```text
@@ -67,57 +194,6 @@ flowchart TD
 ├── code.zip                     # Runnable submission package
 └── README.md                    # Root project documentation
 ```
-
----
-
-## ⚡ Quick Start & Installation
-
-### Prerequisites
-- Python 3.9+
-- Node.js 18+ (for live WhatsApp connection)
-
-### Setup
-```bash
-# Clone repository
-git clone https://github.com/Aj2280/Message-Notification-Router.git
-cd Message-Notification-Router
-
-# Install Python requirements
-pip install -r code/requirements.txt
-```
-
----
-
-## 🎮 Running the System
-
-### 1. Generate Dataset Predictions
-Generate `dataset/output.csv` for all 110 messages in `dataset/messages.csv`:
-```bash
-python3 code/main.py
-```
-
-### 2. Run Benchmark Validation Test
-Verify 100% accuracy on sample ground-truth test cases:
-```bash
-python3 code/src/validator.py
-```
-
-### 3. Interactive Terminal Simulator
-Simulate custom incoming WhatsApp messages interactively:
-```bash
-python3 code/simulate_whatsapp.py
-```
-
-### 4. Connect to Live WhatsApp
-Start the Python REST Webhook API server:
-```bash
-python3 code/server.py 8080
-```
-In a second terminal, launch the live WhatsApp bridge:
-```bash
-node code/connect_whatsapp.js
-```
-Scan the QR code displayed in the terminal using WhatsApp on your phone (**Linked Devices** -> **Link a Device**). Any incoming message or image sent to your WhatsApp will be routed live in your terminal console!
 
 ---
 
