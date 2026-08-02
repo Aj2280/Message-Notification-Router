@@ -6,13 +6,15 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 sys.path.insert(0, os.path.abspath("code"))
 from src.context_builder import ContextBuilder
 from src.decision_logic import DecisionRouter
+from src.trained_router import TrainedRouter
 from src.llm_router import LLMRouter
 from src.evidence_selector import EvidenceSelector
 
-print("Initializing ContextBuilder and LLM Router for WhatsApp Webhook Server...")
+print("Initializing ContextBuilder, Trained ML Model, and LLM Router for WhatsApp Webhook Server...")
 cb = ContextBuilder("dataset")
-local_router = DecisionRouter()
-router = LLMRouter(fallback_router=local_router)  # Uses Gemini API if GEMINI_API_KEY is set, else local engine
+trained_ml_router = TrainedRouter()
+fallback = trained_ml_router if trained_ml_router._ready else DecisionRouter()
+router = LLMRouter(fallback_router=fallback)
 evidence_selector = EvidenceSelector()
 
 class WhatsAppWebhookHandler(BaseHTTPRequestHandler):
