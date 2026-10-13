@@ -1,0 +1,139 @@
+{
+  "name": "WhatsApp Notification Router AI Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-incoming",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Incoming WhatsApp Message",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:8080/webhook/whatsapp",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"message_id\": {{ JSON.stringify($json.body.message_id || $json.body.id || 'msg_001') }},\n  \"user_id\": {{ JSON.stringify($json.body.user_id || 'me') }},\n  \"conversation_type\": {{ JSON.stringify($json.body.conversation_type || ($json.body.from?.includes('@g.us') ? 'group' : 'personal')) }},\n  \"sender_user_id\": {{ JSON.stringify($json.body.sender || $json.body.from || '') }},\n  \"message_text\": {{ JSON.stringify($json.body.text || $json.body.message_text || $json.body.body || '') }}\n}",
+        "options": {}
+      },
+      "id": "ai-router",
+      "name": "AI Decision Router (Port 8080)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.action }}",
+        "rules": {
+          "rules": [
+            {
+              "value2": "notify",
+              "outputKey": "notify"
+            },
+            {
+              "value2": "digest",
+              "outputKey": "digest"
+            },
+            {
+              "value2": "mute",
+              "outputKey": "mute"
+            }
+          ]
+        }
+      },
+      "id": "switch-action",
+      "name": "Route by Action (Notify / Digest / Mute)",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 2,
+      "position": [720, 300]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "action-notify",
+      "name": "🔔 Send Urgent Alert (Notify)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [960, 180]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "action-digest",
+      "name": "📥 Append to Digest Queue (Show Later)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [960, 300]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "action-mute",
+      "name": "🔕 Mute & Security Audit (Suppress)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [960, 420]
+    }
+  ],
+  "connections": {
+    "Incoming WhatsApp Message": {
+      "main": [
+        [
+          {
+            "node": "AI Decision Router (Port 8080)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Decision Router (Port 8080)": {
+      "main": [
+        [
+          {
+            "node": "Route by Action (Notify / Digest / Mute)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route by Action (Notify / Digest / Mute)": {
+      "main": [
+        [
+          {
+            "node": "🔔 Send Urgent Alert (Notify)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "📥 Append to Digest Queue (Show Later)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "🔕 Mute & Security Audit (Suppress)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

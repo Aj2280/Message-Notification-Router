@@ -54,6 +54,7 @@ async function connectToWhatsApp() {
     sock.ev.on('messages.upsert', async (m) => {
         const msg = m.messages[0];
         if (!msg || !msg.message || msg.key.fromMe) return;
+        if (msg.key.remoteJid === 'status@broadcast') return; // Skip WhatsApp status broadcasts
 
         // Extract text across all WhatsApp message types
         const messageContent = msg.message;
