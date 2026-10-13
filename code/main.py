@@ -3,7 +3,8 @@ import sys
 import os
 
 sys.path.insert(0, os.path.abspath("code"))
-sys.path.insert(0, "/Users/abhi/Library/Python/3.9/lib/python/site-packages")
+if sys.version_info[:2] == (3, 9) and os.path.exists("/Users/abhi/Library/Python/3.9/lib/python/site-packages"):
+    sys.path.insert(0, "/Users/abhi/Library/Python/3.9/lib/python/site-packages")
 from src.context_builder import ContextBuilder
 from src.decision_logic import DecisionRouter
 from src.trained_router import TrainedRouter

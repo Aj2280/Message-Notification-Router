@@ -11,8 +11,9 @@ drop-in replace it anywhere in the pipeline.
 import os, sys, pickle
 import site
 
-# Ensure user site-packages are on path
-sys.path.insert(0, "/Users/abhi/Library/Python/3.9/lib/python/site-packages")
+# Ensure user site-packages are on path if running Python 3.9
+if sys.version_info[:2] == (3, 9) and os.path.exists("/Users/abhi/Library/Python/3.9/lib/python/site-packages"):
+    sys.path.insert(0, "/Users/abhi/Library/Python/3.9/lib/python/site-packages")
 
 import numpy as np
 import scipy.sparse as sp

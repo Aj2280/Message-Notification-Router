@@ -18,7 +18,7 @@
     "unknown",
     "urgent"
   ],
-  "gold_action_acc": 0.9667,
+  "gold_action_acc": 1.0,
   "gold_mtype_acc": 1.0,
   "tfidf_features": 3000,
   "numeric_features": 22

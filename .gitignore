@@ -4,12 +4,16 @@ venv/
 env/
 node_modules/
 package-lock.json
+__pycache__/
+*.pyc
 
 # Scratch & Temporary Auth Session Files
 scratch/
 .swift-cache/
 *.log
 log.txt
+*.zip
+submission_files/
 
 # OS Files
 .DS_Store

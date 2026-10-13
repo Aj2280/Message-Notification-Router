@@ -30,7 +30,8 @@ import site
 for sp in site.getusersitepackages() if hasattr(site, "getusersitepackages") else []:
     if sp not in sys.path:
         sys.path.insert(0, sp)
-sys.path.insert(0, "/Users/abhi/Library/Python/3.9/lib/python/site-packages")
+if sys.version_info[:2] == (3, 9) and os.path.exists("/Users/abhi/Library/Python/3.9/lib/python/site-packages"):
+    sys.path.insert(0, "/Users/abhi/Library/Python/3.9/lib/python/site-packages")
 
 import numpy as np
 

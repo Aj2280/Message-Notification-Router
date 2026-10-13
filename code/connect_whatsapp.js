@@ -94,30 +94,53 @@ async function connectToWhatsApp() {
 
         const sender = msg.key.remoteJid;
         const pushName = msg.pushName || 'Sender';
-
-        console.log(`\n📩 Incoming Real WhatsApp Message from [${pushName} - ${sender}]:`);
-        console.log(`   "${text}"`);
+        const isGroup = sender.endsWith('@g.us');
 
         try {
             // Forward payload to Python Router Webhook Server
             const res = await axios.post('http://localhost:8080/webhook/whatsapp', {
                 message_id: msg.key.id,
                 user_id: 'me',
-                conversation_type: sender.endsWith('@g.us') ? 'group' : 'personal',
+                conversation_type: isGroup ? 'group' : 'personal',
                 sender_user_id: sender,
                 message_text: text,
                 created_at: new Date().toISOString()
             });
 
             const decision = res.data;
-            console.log('🤖 AI Router Decision:');
-            console.log(`   ➜ ACTION: ${decision.action.toUpperCase()}`);
-            console.log(`   ➜ TYPE  : ${decision.message_type}`);
-            console.log(`   ➜ REASON: ${decision.reason}`);
-            console.log(`   ➜ CONF  : ${decision.confidence}\n`);
+            const action = (decision.action || 'digest').toLowerCase();
+            
+            // ANSI styling tokens
+            const RESET = "\x1b[0m";
+            const BOLD = "\x1b[1m";
+            const DIM = "\x1b[2m";
+            const GREEN = "\x1b[92m";
+            const YELLOW = "\x1b[93m";
+            const RED = "\x1b[91m";
+            const CYAN = "\x1b[96m";
+            const MAGENTA = "\x1b[95m";
+
+            let actionBadge = `${YELLOW}📥 DIGEST (Batch Later)${RESET}`;
+            if (action === 'notify') actionBadge = `${GREEN}🔔 NOTIFY (Interrupt Now)${RESET}`;
+            if (action === 'mute')   actionBadge = `${RED}🔕 MUTE   (Suppress Risk)${RESET}`;
+
+            const confVal = parseFloat(decision.confidence) || 0.8;
+            const bars = '█'.repeat(Math.round(confVal * 10)) + '░'.repeat(10 - Math.round(confVal * 10));
+
+            console.log(`\n${BOLD}┌── 📩 Incoming WhatsApp Message ───────────────────────────────────────────────┐${RESET}`);
+            console.log(`│  ${BOLD}Sender${RESET}   : ${pushName} (${sender})`);
+            console.log(`│  ${BOLD}Type${RESET}     : ${MAGENTA}${isGroup ? 'GROUP CHAT' : 'PERSONAL CHAT'}${RESET}`);
+            console.log(`│  ${BOLD}Message${RESET}  : "${text.length > 75 ? text.substring(0, 72) + '...' : text}"`);
+            console.log(`├── 🤖 AI Routing Decision ─────────────────────────────────────────────────────┤`);
+            console.log(`│  ${BOLD}Decision${RESET} : ${BOLD}${actionBadge}`);
+            console.log(`│  ${BOLD}Category${RESET} : ${CYAN}${BOLD}${decision.message_type?.toUpperCase()}${RESET}`);
+            console.log(`│  ${BOLD}Score${RESET}    : [${bars}] ${(confVal * 100).toFixed(1)}%`);
+            console.log(`│  ${BOLD}Rationale${RESET}: ${decision.reason}`);
+            console.log(`│  ${BOLD}Evidence${RESET} : ${DIM}${decision.evidence_message_ids || 'none'}${RESET}`);
+            console.log(`${BOLD}└───────────────────────────────────────────────────────────────────────────────┘${RESET}\n`);
 
         } catch (err) {
-            console.error('Error forwarding message to AI router (make sure python3 code/server.py 8080 is running):', err.message);
+            console.error('\x1b[91m⚠️ Error forwarding message to AI router (ensure python3 code/server.py 8080 is running):\x1b[0m', err.message);
         }
     });
 }

@@ -16,6 +16,14 @@ class ContextBuilder:
         self.images = self._load_csv("images.csv", key_col="image_id")
         self.voice_notes = self._load_csv("voice_notes.csv", key_col="voice_note_id")
         self.image_ocr_cache = self._load_ocr_cache()
+        self.voice_asr_cache = self._load_asr_cache()
+
+    def _load_asr_cache(self):
+        asr_path = "scratch/voice_transcription_cache.json"
+        if os.path.exists(asr_path):
+            with open(asr_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        return {}
 
     def _load_csv(self, filename, key_col):
         path = os.path.join(self.dataset_dir, filename)
@@ -127,6 +135,15 @@ class ContextBuilder:
         if media_type == "image" and media_id:
             ocr_text = self.image_ocr_cache.get(media_id, "")
 
+        voice_text = ""
+        if media_type == "voice" and media_id:
+            voice_text = self.voice_asr_cache.get(media_id, "")
+
+        # If message_text is empty and voice transcription exists, populate it
+        msg_dict = dict(message_row)
+        if not msg_dict.get("message_text") and voice_text:
+            msg_dict["message_text"] = voice_text
+
         user_history = []
         for h_msg in self.message_history:
             if h_msg["user_id"] == user_id:
@@ -141,7 +158,7 @@ class ContextBuilder:
                     user_history.append(combined)
 
         return {
-            "message": message_row,
+            "message": msg_dict,
             "user_info": user_info,
             "is_dnd": is_dnd,
             "group_info": group_info,
@@ -150,5 +167,6 @@ class ContextBuilder:
             "biz_history": biz_history,
             "domain_mismatch": domain_mismatch,
             "ocr_text": ocr_text,
+            "voice_text": voice_text,
             "user_history": user_history
         }
